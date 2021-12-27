@@ -1,0 +1,30 @@
+{
+	"name": "projeto-nodejs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Luis-H-Baroni/modulo-nodejs.git"
+	},
+	"author": "Luis H Baroni",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Luis-H-Baroni/modulo-nodejs/issues"
+	},
+	"homepage": "https://github.com/Luis-H-Baroni/modulo-nodejs#readme",
+	"dependencies": {
+		"body-parser": "^1.19.1",
+		"consign": "^0.1.6",
+		"express": "^4.17.2",
+		"moment": "^2.29.1",
+		"mysql2": "^2.3.3"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
+}
