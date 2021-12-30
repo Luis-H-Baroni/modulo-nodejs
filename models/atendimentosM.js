@@ -50,6 +50,7 @@ class Atendimento {
 
 			return repositorio.adiciona(atendimentoDatado).then((resultados) => {
 				const id = resultados.insertId
+
 				return { ...atendimento, id }
 			})
 		}
@@ -57,22 +58,14 @@ class Atendimento {
 	lista() {
 		return repositorio.lista()
 	}
-	buscarId(id, res) {
-		const sql = `SELECT * FROM Atendimentos WHERE id = ${id}`
-
-		conexao.query(sql, async (erro, resultado) => {
-			const atendimento = resultado[0]
+	buscarId(id) {
+		return repositorio.buscarId(id).then(async (resultados) => {
+			const atendimento = resultados[0]
 			const cpf = atendimento.cliente
+			const { data } = await axios.get(`http://localhost:8082/${cpf}`)
+			atendimento.cliente = data
 
-			if (erro) {
-				res.status(400).json(erro)
-			} else {
-				const { data } = await axios.get(`http://localhost:8082/${cpf}`)
-
-				atendimento.cliente = data
-
-				res.status(200).json(atendimento)
-			}
+			return atendimento
 		})
 	}
 	altera(id, valores, res) {
@@ -81,25 +74,13 @@ class Atendimento {
 				"YYYY-MM-DD HH:MM:SS"
 			)
 		}
-		const sql = "UPDATE Atendimentos SET ? WHERE id = ?"
-
-		conexao.query(sql, [valores, id], (erro, resultado) => {
-			if (erro) {
-				res.status(400).json(erro)
-			} else {
-				res.status(200).json({ ...valores, id })
-			}
+		return repositorio.altera(id, valores).then((resultados) => {
+			return { ...resultados, id }
 		})
 	}
-	deleta(id, res) {
-		const sql = `DELETE FROM Atendimentos WHERE id = ${id}`
-
-		conexao.query(sql, (erro, resultado) => {
-			if (erro) {
-				res.status(400).json(erro)
-			} else {
-				res.status(200).json({ id, resultado })
-			}
+	deleta(id) {
+		return repositorio.deleta(id).then((resultados) => {
+			return { ...resultados, id }
 		})
 	}
 }
