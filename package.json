@@ -23,10 +23,13 @@
 		"consign": "^0.1.6",
 		"express": "^4.17.2",
 		"faker": "^5.5.3",
+		"mocha": "^9.1.4",
 		"moment": "^2.29.1",
 		"mysql2": "^2.3.3"
 	},
 	"devDependencies": {
-		"nodemon": "^2.0.15"
+		"jest": "^27.4.7",
+		"nodemon": "^2.0.15",
+		"supertest": "^6.2.1"
 	}
 }
